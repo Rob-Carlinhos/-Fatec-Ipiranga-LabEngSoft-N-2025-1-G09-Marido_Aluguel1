@@ -1,0 +1,21 @@
+# Ignorar dependências
+node_modules/
+
+# Ignorar variáveis de ambiente
+.env*
+.env.local
+
+# Ignorar build do Next.js
+.next/
+out/
+
+# Ignorar logs e caches
+*.log
+.cache/
+
+# Ignorar configurações do sistema operacional/editor
+.DS_Store
+*.swp
+
+# Ignorar pastas do Docker que não são necessárias
+frontend/.dockerignore

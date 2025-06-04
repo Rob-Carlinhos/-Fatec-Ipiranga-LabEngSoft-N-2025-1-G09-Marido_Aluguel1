@@ -1,0 +1,39 @@
+services:
+  db:
+    build: ./mysql-custom
+    container_name: db
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+    volumes:
+      - db_data:/var/lib/mysql
+
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: 1234
+      DB_NAME: marido_aluguel
+      JWT_SECRET: chave_super_secreta_para_token
+      EMAIL_USER: b7pc2ifpody4xdvs@ethereal.email
+      EMAIL_PASS: bJHfWcmutUR9NCXspe
+      EMAIL_FROM: "Equipe Marido de Aluguel <b7pc2ifpody4xdvs@ethereal.email>"
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  db_data:
